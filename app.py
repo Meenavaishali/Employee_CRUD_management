@@ -1,12 +1,12 @@
 from flask import Flask, request, jsonify, render_template
 import mysql.connector
 from flask_cors import CORS
-from config import DB_CONFIG  # Import secure database config
+from config import DB_CONFIG 
 
 app = Flask(__name__)
-CORS(app)  # Enable CORS to allow frontend communication
+CORS(app) 
 
-# Database Connection Function (Auto-close using `with`)
+# Database Connection Function
 def get_db_connection():
     return mysql.connector.connect(
         host=DB_CONFIG["host"],
@@ -15,12 +15,12 @@ def get_db_connection():
         database=DB_CONFIG["database"]
     )
 
-# Serve the frontend HTML page
+
 @app.route('/')
 def home():
     return render_template('index.html')
 
-# ✅ Create Employee (POST)
+# Create Employee (POST)
 @app.route('/add_employee', methods=['POST'])
 def add_employee():
     try:
@@ -42,7 +42,7 @@ def add_employee():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
-# ✅ Get All Employees (GET)
+# Get All Employees (GET)
 @app.route('/get_employees', methods=['GET'])
 def get_employees():
     try:
@@ -55,7 +55,7 @@ def get_employees():
     except Exception as e:
         return jsonify({"error": str(e)})
 
-# ✅ Search Employee by Name (GET)
+# Search Employee by Name (GET)
 @app.route('/search_employee', methods=['GET'])
 def search_employee():
     try:
@@ -72,7 +72,7 @@ def search_employee():
         return jsonify({"error": str(e)})
 
 
-# ✅ Update Employee (PUT)
+# Update Employee (PUT)
 @app.route('/update_employee/<int:id>', methods=['PUT'])
 def update_employee(id):
     try:
@@ -93,7 +93,7 @@ def update_employee(id):
     except Exception as e:
         return jsonify({"error": str(e)})
 
-# ✅ Delete Employee (DELETE)
+# Delete Employee (DELETE)
 @app.route('/delete_employee/<int:id>', methods=['DELETE'])
 def delete_employee(id):
     try:

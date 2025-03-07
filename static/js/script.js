@@ -1,4 +1,4 @@
-// ✅ Add Employee
+// Add Employee
 function addEmployee() {
     let name = document.getElementById("name").value;
     let interviewTime = document.getElementById("interview_time").value;
@@ -18,7 +18,7 @@ function addEmployee() {
     .catch(error => console.error("Error adding employee:", error));
 }
 
-// ✅ Search Employee
+// Search Employee
 function searchEmployee() {
     let name = document.getElementById("search_name").value;
     fetch(`http://127.0.0.1:5000/search_employee?name=${name}`)
@@ -57,7 +57,7 @@ function searchEmployee() {
 }
 
 
-// ✅ Update Employee
+//  Update Employee
 function updateEmployee(id) {
     let name = document.getElementById(`name_${id}`).value;
     let interviewTime = document.getElementById(`interview_time_${id}`).value;
@@ -77,7 +77,7 @@ function updateEmployee(id) {
     .catch(error => console.error("Error updating employee:", error));
 }
 
-// ✅ Delete Employee
+// Delete Employee
 function deleteEmployee(id) {
     if (!confirm("Are you sure you want to delete this employee?")) {
         return;
