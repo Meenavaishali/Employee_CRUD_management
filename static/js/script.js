@@ -1,4 +1,4 @@
-// ✅ Add Employee
+// Add Employee
 function addEmployee() {
     let name = document.getElementById("name").value;
     let interviewTime = document.getElementById("interview_time").value;
@@ -12,27 +12,22 @@ function addEmployee() {
     })
     .then(response => response.json())
     .then(data => {
-        if (data.error) {
-            alert("Error: " + data.error);
-        } else {
-            alert("Employee added successfully!");
-            document.getElementById("employee_form").reset();
-            searchEmployee();  // Reload employee list
-        }
+        alert(data.message);
+        document.getElementById("employee_form").reset();
     })
     .catch(error => console.error("Error adding employee:", error));
 }
 
-// ✅ Search Employee
+// Search Employee
 function searchEmployee() {
     let name = document.getElementById("search_name").value;
-    fetch(`/search_employee?name=${encodeURIComponent(name)}`)
+    fetch(`http://127.0.0.1:5000/search_employee?name=${name}`)
     .then(response => response.json())
     .then(data => {
         let results = document.getElementById("search_results");
         results.innerHTML = "";
 
-        if (!data || data.length === 0) {
+        if (data.length === 0) {
             results.innerHTML = "<p>No employees found.</p>";
             return;
         }
@@ -58,10 +53,10 @@ function searchEmployee() {
             `;
         });
     })
-    .catch(error => console.error("Error fetching employees:", error));
+    .catch(error => console.error(error));
 }
 
-// ✅ Update Employee
+// Update Employee
 function updateEmployee(id) {
     let name = document.getElementById(`name_${id}`).value;
     let interviewTime = document.getElementById(`interview_time_${id}`).value;
@@ -81,7 +76,7 @@ function updateEmployee(id) {
     .catch(error => console.error("Error updating employee:", error));
 }
 
-// ✅ Delete Employee
+// Delete Employee
 function deleteEmployee(id) {
     if (!confirm("Are you sure you want to delete this employee?")) {
         return;
@@ -97,6 +92,3 @@ function deleteEmployee(id) {
     })
     .catch(error => console.error("Error deleting employee:", error));
 }
-
-// ✅ Load Employees on Page Load
-window.onload = searchEmployee;
