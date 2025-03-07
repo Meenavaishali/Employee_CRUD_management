@@ -20,6 +20,27 @@ def get_db_connection():
 def home():
     return render_template('index.html')
 
+@app.route("/search", methods=["GET"])
+def search():
+    query = request.args.get("query", "").strip()
+    
+    if not query:
+        return jsonify([])  
+
+    conn = get_db_connection()
+    cur = conn.cursor()
+    
+    # Perform case-insensitive search in database
+    cur.execute("SELECT * FROM employees WHERE name LIKE ?", ('%' + query + '%',))
+    results = cur.fetchall()
+    
+    conn.close()
+
+    # Convert results to JSON-friendly format
+    employees = [{"id": row["id"], "name": row["name"], "position": row["position"]} for row in results]
+
+    return jsonify(employees)
+
 # Create Employee (POST)
 @app.route('/add_employee', methods=['POST'])
 def add_employee():
