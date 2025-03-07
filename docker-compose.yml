@@ -18,5 +18,11 @@ services:
       MYSQL_DATABASE: employee_db
       MYSQL_USER: user
       MYSQL_PASSWORD: password
+    command: --default-authentication-plugin=mysql_native_password
     ports:
       - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+volumes:
+  mysql_data:
