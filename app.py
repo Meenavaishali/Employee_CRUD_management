@@ -8,7 +8,7 @@ CORS(app)
 
 # Database Connection Function
 def get_db_connection():
-    return MySQL.connector.connect(
+    return mySQL.connector.connect(
         host=DB_CONFIG["host"],
         user=DB_CONFIG["user"],
         password=DB_CONFIG["password"],
