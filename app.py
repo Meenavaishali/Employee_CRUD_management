@@ -8,7 +8,7 @@ CORS(app)
 
 # Database Connection Function
 def get_db_connection():
-    return mysql.connector.connect(
+    return MySQL.connector.connect(
         host=DB_CONFIG["host"],
         user=DB_CONFIG["user"],
         password=DB_CONFIG["password"],
@@ -31,7 +31,7 @@ def search():
     cur = conn.cursor()
     
     # Perform case-insensitive search in database
-    cur.execute("SELECT * FROM employees WHERE name LIKE ?", ('%' + query + '%',))
+    cur.execute("SELECT * FROM employees WHERE name LIKE %s", ('%' + query + '%',))
     results = cur.fetchall()
     
     conn.close()
