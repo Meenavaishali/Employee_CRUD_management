@@ -12,8 +12,11 @@ function addEmployee() {
     })
     .then(response => response.json())
     .then(data => {
-        alert(data.message);
-        document.getElementById("employee_form").reset();
+         if (data.error) {
+            alert("Error: " + data.error);
+        } else {
+            alert("Employee added successfully!");
+        }
     })
     .catch(error => console.error("Error adding employee:", error));
 }
