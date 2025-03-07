@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Management Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script defer src="{{ url_for('static', filename='js/script.js') }}"></script>
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h2>Company Portal</h2>
+        <ul>
+            <li><a href="#">🏠 Dashboard</a></li>
+            <li><a href="#">👥 Employees</a></li>
+            <li><a href="#">📊 Reports</a></li>
+            <li><a href="#">⚙️ Settings</a></li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <h1>Employee Management System</h1>
+
+        <!-- Add Employee Section -->
+        <div class="card">
+            <h2>Add Employee</h2>
+            <form id="employee_form">
+                <label for="name">Name:</label>
+                <input type="text" id="name" placeholder="Enter Name">
+                
+                <label for="interview_time">Interview Time:</label>
+                <input type="datetime-local" id="interview_time">
+                
+                <label for="details">Details:</label>
+                <textarea id="details" placeholder="Enter Details"></textarea>
+                
+                <label for="notes">Notes:</label>
+                <textarea id="notes" placeholder="Enter Notes"></textarea>
+                
+                <button type="button" onclick="addEmployee()">Save</button>
+            </form>
+        </div>
+
+        <!-- Search Employee Section -->
+        <div class="card">
+            <h2>Search Employee</h2>
+            <input type="text" id="search_name" placeholder="Enter Employee Name">
+            <button onclick="searchEmployee()">Search</button>
+        </div>
+
+        <!-- Employee Details Section -->
+        <div class="card">
+            <h2>Employee Details</h2>
+            <div id="search_results"></div>
+        </div>
+    </div>
+</body>
+</html>
